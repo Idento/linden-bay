@@ -1,0 +1,348 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import {
+  amenities,
+  bookingEmail,
+  diningDetails,
+  distances,
+  faqs,
+  footerColumns,
+  navigation,
+  press,
+  rooms,
+  stats,
+  testimonials,
+} from '../data/content';
+import hero from '../assets/images/hero.jpg';
+import dining from '../assets/images/dining.jpg';
+import location from '../assets/images/location.jpg';
+import cta from '../assets/images/cta.jpg';
+
+const bookingLink = `mailto:${bookingEmail}?subject=Availability`;
+const roomsLink = `mailto:${bookingEmail}?subject=Room%20list`;
+const tableLink = `mailto:${bookingEmail}?subject=Table%20reservation`;
+const directionsLink = 'https://www.openstreetmap.org/#map=11/50.62/-2.05';
+const glyphs = { yes: 'Y', partial: '~', no: 'N' } as const;
+const statusLabels = { yes: 'Included', partial: 'Partly', no: 'Not available' } as const;
+---
+
+<Base
+  title="Linden Bay | A nine-room hotel on the Dorset coast"
+  description="Linden Bay is a nine-room hotel on the Dorset coast, built for long breakfasts, cold swims and short sentences."
+>
+  <header class="hero">
+    <Image
+      class="cover"
+      src={hero}
+      alt=""
+      widths={[480, 828, 1200, 1600, 2400]}
+      sizes="100vw"
+      quality={60}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <nav class="nav wrap" aria-label="Main">
+      <a class="wordmark" href={`${import.meta.env.BASE_URL}/`}>Linden Bay</a>
+      <ul class="nav-links">
+        {
+          navigation.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="btn btn--light" href={bookingLink}>Book</a>
+    </nav>
+    <div class="hero-body wrap" id="content" tabindex="-1">
+      <p class="badge"><span class="badge-dot" aria-hidden="true"></span>Opening season · Now booking</p>
+      <h1>Slow mornings on the water's edge</h1>
+      <p class="hero-text">
+        Linden Bay is a nine-room hotel on the Dorset coast, built for long breakfasts, cold swims and short sentences.
+      </p>
+      <div class="actions">
+        <a class="btn btn--light" href={bookingLink}>Check availability</a>
+        <a class="btn btn--ghost" href="#rooms">View rooms</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="press wrap" aria-labelledby="press-title">
+      <h2 class="press-title" id="press-title">As featured in</h2>
+      <ul class="press-list">
+        {press.map((name) => <li>{name}</li>)}
+      </ul>
+    </section>
+
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="wrap">
+        <h2 class="eyebrow" id="intro-title">The hotel</h2>
+        <p class="intro-text">
+          Linden Bay sits where the cliff path meets the tide line, nine rooms above a dining room that only serves what
+          came in that morning. We built it slowly, over four years, mostly by hand.
+        </p>
+        <dl class="stats">
+          {
+            stats.map((stat) => (
+              <div class="stat">
+                <dt>{stat.label}</dt>
+                <dd>{stat.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    <section class="rooms" id="rooms" aria-labelledby="rooms-title">
+      <div class="wrap">
+        <div class="rooms-head">
+          <div class="heading">
+            <p class="eyebrow">Stay</p>
+            <h2 class="h2" id="rooms-title">Nine rooms, four kinds of quiet</h2>
+          </div>
+          <a class="btn btn--outline" href={roomsLink}>View all rooms</a>
+        </div>
+        <ul class="room-grid">
+          {
+            rooms.map((room) => (
+              <li class="card room">
+                <Image
+                  class="room-image"
+                  src={room.image}
+                  alt={room.alt}
+                  widths={[320, 480, 640, 800]}
+                  sizes="(min-width: 1200px) 282px, (min-width: 768px) calc(50vw - 44px), calc(100vw - 40px)"
+                />
+                <div class="room-body">
+                  <h3 class="room-name">{room.name}</h3>
+                  <p class="room-detail">{room.detail}</p>
+                  <p class="room-price">{room.price}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="dining" id="dining" aria-labelledby="dining-title">
+      <Image class="cover" src={dining} alt="" widths={[480, 828, 1200, 1600, 2400]} sizes="100vw" quality={60} />
+      <div class="dining-body wrap">
+        <p class="eyebrow eyebrow--dark">Dining</p>
+        <h2 class="h2" id="dining-title">One table, one menu, one seating</h2>
+        <p class="dining-text">
+          Six courses built around whatever the boats and the garden gave us that day. No menu printed until 4pm.
+        </p>
+        <ul class="dining-details">
+          {diningDetails.map((detail) => <li>{detail}</li>)}
+        </ul>
+        <a class="btn btn--light" href={tableLink}>Reserve a table</a>
+      </div>
+    </section>
+
+    <section class="location" id="location" aria-labelledby="location-title">
+      <div class="wrap location-row">
+        <div class="location-copy">
+          <p class="eyebrow">Location</p>
+          <h2 class="h2b" id="location-title">Forty minutes from the station, a world away from the week</h2>
+          <p class="location-text">
+            We are at the end of a single lane, past the last farm and before the cliff path. There is no sign, only a
+            gate.
+          </p>
+          <a class="btn btn--outline" href={directionsLink}>Get directions</a>
+        </div>
+        <div class="location-visual" id="getting-here">
+          <Image
+            class="location-image"
+            src={location}
+            alt="Aerial view of a village with red and grey tin roofs"
+            widths={[440, 700, 880, 1040]}
+            sizes="(min-width: 1200px) 440px, (min-width: 768px) 50vw, calc(100vw - 40px)"
+          />
+          <dl class="distances" aria-label="Distances from the hotel">
+            {
+              distances.map((row) => (
+                <div class="distance">
+                  <dt>{row.place}</dt>
+                  <dd>{row.time}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="voices" id="voices" aria-labelledby="voices-title">
+      <div class="wrap">
+        <div class="heading">
+          <p class="eyebrow">Voices</p>
+          <h2 class="h2" id="voices-title">What guests tend to say</h2>
+        </div>
+        <ul class="voice-grid">
+          {
+            testimonials.map((item) => (
+              <li class="card voice">
+                <figure>
+                  <blockquote>
+                    <p>{item.quote}</p>
+                  </blockquote>
+                  <figcaption>
+                    <Image class="avatar" src={item.avatar} alt="" width={40} height={40} densities={[1, 2]} />
+                    <span class="voice-name">
+                      <strong>{item.name}</strong>
+                      <span>Guest</span>
+                    </span>
+                  </figcaption>
+                </figure>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="amenities" aria-labelledby="amenities-title">
+      <div class="wrap">
+        <div class="heading">
+          <p class="eyebrow">At the hotel</p>
+          <h2 class="h2" id="amenities-title">What is included, and what is not</h2>
+        </div>
+        <div class="amenity-grid">
+          {
+            amenities.map((column) => (
+              <ul class="amenity-column">
+                {column.map((item) => (
+                  <li class="amenity">
+                    <span class="check" aria-hidden="true">
+                      {glyphs[item.status]}
+                    </span>
+                    <span class="visually-hidden">{statusLabels[item.status]}:</span>
+                    {item.label}
+                  </li>
+                ))}
+              </ul>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div class="heading">
+          <p class="eyebrow">Questions</p>
+          <h2 class="h2" id="faq-title">Before you book</h2>
+        </div>
+        <dl class="faq-list">
+          {
+            faqs.map((faq) => (
+              <div class="faq-item">
+                <dt>{faq.question}</dt>
+                <dd>{faq.answer}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <Image class="cover" src={cta} alt="" widths={[480, 828, 1200, 1600, 2400]} sizes="100vw" quality={60} />
+      <div class="cta-body wrap">
+        <h2 class="cta-title" id="cta-title">Book the season before it books out</h2>
+        <p class="cta-text">Weekends fill first. Midweek still has room through November.</p>
+        <div class="actions">
+          <a class="btn btn--light" href={bookingLink}>Check availability</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="wordmark">Linden Bay</p>
+          <p class="footer-tagline">A nine-room hotel on the Dorset coast.</p>
+        </div>
+        {
+          footerColumns.map((column) => (
+            <nav class="footer-column" aria-label={column.title}>
+              <h2 class="footer-title">{column.title}</h2>
+              <ul class="footer-links">
+                {column.links.map((link) => (
+                  <li>
+                    <a href={link.href}>{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))
+        }
+        <div class="footer-column">
+          <h2 class="footer-title" id="newsletter-title">Newsletter</h2>
+          <form class="newsletter" aria-labelledby="newsletter-title" novalidate data-newsletter>
+            <label class="visually-hidden" for="newsletter-email">Email address</label>
+            <input
+              id="newsletter-email"
+              type="email"
+              name="email"
+              placeholder="Email address"
+              autocomplete="email"
+              aria-describedby="newsletter-status"
+              required
+            />
+            <button type="submit" aria-label="Subscribe">→</button>
+          </form>
+          <p class="newsletter-status" id="newsletter-status" role="status" data-newsletter-status></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          © 2026 Linden Bay. Designed by <a href="https://www.figma.com/community/file/1690005449721707193/linden-bay-boutique-hotel-landing-page"
+            >Alex Mërović</a
+          > (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>), built by Maxime Tsouri.
+        </p>
+        <ul class="footer-social">
+          <li><a href="https://www.instagram.com/">Instagram</a></li>
+          <li><a href="#voices">Journal</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-newsletter]');
+  const status = document.querySelector<HTMLElement>('[data-newsletter-status]');
+
+  const input = form?.querySelector('input');
+
+  const showStatus = (message: string, isError: boolean) => {
+    if (!status || !input) return;
+    status.textContent = message;
+    status.classList.toggle('is-error', isError);
+    if (isError) input.setAttribute('aria-invalid', 'true');
+    else input.removeAttribute('aria-invalid');
+  };
+
+  input?.addEventListener('input', () => {
+    if (input.getAttribute('aria-invalid') === 'true') showStatus('', false);
+  });
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!input) return;
+    if (!input.checkValidity()) {
+      showStatus('Please enter a valid email address.', true);
+      input.focus();
+      return;
+    }
+    form.reset();
+    showStatus('Thank you. This is a demo site, so nothing was sent.', false);
+  });
+</script>

@@ -56,5 +56,5 @@ npm run dev
 
 - Design: [Linden Bay · Boutique Hotel Landing Page](https://www.figma.com/community/file/1690005449721707193/linden-bay-boutique-hotel-landing-page) by Alex Mërović, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: the fixes listed above.
 - Photos and portraits: included in the design file. The Figma page does not say where they come from.
-- Linden Bay is a fictional hotel. Booking buttons open an email to a placeholder address, the newsletter form sends nothing.
+- Linden Bay is a fictional hotel. The booking buttons scroll to the relevant section, there are no contact details, and the newsletter form sends nothing.
 - Code: Maxime Tsouri.

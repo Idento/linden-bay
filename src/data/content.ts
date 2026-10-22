@@ -8,8 +8,6 @@ import avatarMarianne from '../assets/images/avatar-marianne.jpg';
 import avatarThomas from '../assets/images/avatar-thomas.jpg';
 import avatarPriya from '../assets/images/avatar-priya.jpg';
 
-export const bookingEmail = 'stay@lindenbay.example';
-
 export const navigation = [
   { label: 'Rooms', href: '#rooms' },
   { label: 'Dining', href: '#dining' },
@@ -124,7 +122,7 @@ export const footerColumns = [
       { label: 'Rooms', href: '#rooms' },
       { label: 'Dining', href: '#dining' },
       { label: 'Journal', href: '#voices' },
-      { label: 'Careers', href: `mailto:${bookingEmail}?subject=Careers` },
+      { label: 'Careers', href: '#' },
     ],
   },
   {
@@ -133,7 +131,7 @@ export const footerColumns = [
       { label: 'Location', href: '#location' },
       { label: 'Getting here', href: '#getting-here' },
       { label: 'FAQ', href: '#faq' },
-      { label: 'Contact', href: `mailto:${bookingEmail}` },
+      { label: 'Contact', href: '#cta' },
     ],
   },
 ];
